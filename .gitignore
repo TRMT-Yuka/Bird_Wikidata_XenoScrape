@@ -1,0 +1,12 @@
+# Ignore specific directories and their contents
+.ipynb_checkpoints/
+xeno_data/
+wav2_model_data/
+saved_data/
+__pychache__/
+Retrieval_test/
+
+
+# Ignore specific files
+# config.ini
+ontology.pickle
