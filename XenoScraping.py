@@ -1,6 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 
+# 指定pathのディレクトリをkey，その下のファイル名一覧のリストをvalueに
+def directory_to_dict(path):
+    dir_dict = {}
+    for root, dirs, files in os.walk(path):
+        for directory in dirs:
+            sub_dir_path = os.path.join(root, directory)
+            dir_dict[directory] = os.listdir(sub_dir_path)
+        break
+    return dir_dict
+    
 # 引数：url 返り値：soupオブジェクト
 def url2soup(url):
     response = requests.get(url)

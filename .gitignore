@@ -5,6 +5,8 @@ wav2_model_data/
 saved_data/
 __pychache__/
 Retrieval_test/
+wav_model_data/
+done/
 
 
 # Ignore specific files
