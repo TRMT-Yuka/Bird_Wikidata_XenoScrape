@@ -21,3 +21,35 @@ def directory_to_dict(path):
             dir_dict[directory] = os.listdir(sub_dir_path)
         break
     return dir_dict
+
+# =================================================================================================
+import os
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+
+def process_audio(input_tuple):
+    try:
+        bird_id, sound_id = input_tuple
+        if os.path.exists("E:\\xeno_data\\"+bird_id+"\\"+sound_id) and not os.path.exists("E:\\trimmed_xeno_data\\"+bird_id+"\\"+sound_id):
+            sound = AudioSegment.from_mp3("E:\\xeno_data\\"+bird_id+"\\"+sound_id)
+            chunks = split_on_silence(
+                sound,
+                min_silence_len=500,  # 0.5秒以上の無音を検出
+                silence_thresh=-90    # -90dBFS 以下を無音と判定
+            )
+
+            combined = AudioSegment.empty()
+            for chunk in chunks:
+                combined += chunk
+
+            if len(combined) > 30_000:
+                combined = combined[:30_000]
+            
+            if not os.path.exists("E:\\trimmed_xeno_data\\"+bird_id):
+                os.makedirs("E:\\trimmed_xeno_data\\"+bird_id)
+                
+            combined.export("E:\\trimmed_xeno_data\\"+bird_id+"\\"+sound_id, format="mp3")
+
+    except:
+        return input_tuple
