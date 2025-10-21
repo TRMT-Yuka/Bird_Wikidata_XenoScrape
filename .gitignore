@@ -1,9 +1,12 @@
 # Ignore specific directories and their contents
 .ipynb_checkpoints/
+trimmed_xeno_data/
 xeno_data/
+_xeno_data/
 wav2_model_data/
 saved_data/
 __pycache__/
+__pycache__/my_functions.cpython-37.pyc
 Retrieval_test/
 wav_model_data/
 test/
@@ -11,13 +14,7 @@ test/
 
 # Ignore specific files
 # config.ini
+__pycache__/**.pyc
 ontology.pickle
-02_1.ipynb
-02_2.ipynb
-02_3.ipynb
-02_4.ipynb
-02_5.ipynb
-02_6.ipynb
-02_7.ipynb
-02_8.ipynb
-02_9.ipynb
+01_download_mp3 copy**.ipynb
+03**.ipynb
